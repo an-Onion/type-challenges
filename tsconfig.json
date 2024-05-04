@@ -4,6 +4,7 @@
     "module": "ESNext",
     "strict": true,
     "target": "ESNext",
+    "lib": ["ESNext"]
   },
   "include": [
     "src/**/*",
