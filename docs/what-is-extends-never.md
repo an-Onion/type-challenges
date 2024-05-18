@@ -15,4 +15,7 @@ type X5 = Hmm<
 
 [stackoverflow][0]
 
+why `[T] extends [never]`
+
 [0]: https://stackoverflow.com/questions/68693054/what-is-extends-never-used-for/68693367
+[1]: https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types
