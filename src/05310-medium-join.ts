@@ -12,7 +12,7 @@ type cases = [
 
 // ============= Your Code Here =============
 type Join<T extends string[], U extends number | string> = T extends [infer F extends string, ...infer R extends string[]]
-  ? `${F}${R extends [] ? '' : U}${Join<R, U>}`
+  ? `${F}${R extends [] ? '' :U}${Join<R, U>}`
   : ''
 
 
