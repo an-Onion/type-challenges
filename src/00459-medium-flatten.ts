@@ -14,8 +14,8 @@ type error = Flatten<'1'>
 
 
 // ============= Your Code Here =============
-type Flatten<S extends any[], Ret extends any[] = []> =  S extends [infer First, ...infer Rest] 
-  ?  First extends any[] 
-    ? Flatten<[...First, ...Rest], Ret> 
-    : Flatten<[...Rest], [...Ret, First]> 
-  : Ret
+type Flatten<T extends any[]> = T extends [infer F, ...infer R]
+  ? F extends any[]
+    ? Flatten<[...R, ...F]>
+    : [F, ...Flatten<R>]
+  : T;
