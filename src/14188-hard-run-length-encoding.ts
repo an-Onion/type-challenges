@@ -23,12 +23,23 @@ namespace RLE {
           ? `${L[0]}${Encode<Rest, [F]>}`
           : `${L["length"]}${L[0]}${Encode<Rest, [F]>}`
     : L["length"] extends 0
-      ? ''
+      ? ""
       : L["length"] extends 1
         ? L[0]
         : `${L["length"]}${L[0]}`;
 
-  export type Decode<S extends string> = any;
-}
+  export type Decode<
+    S extends string, 
+    L extends string = ''
+  > = S extends `${infer F}${infer R}`
+      ? F extends `${number}`
+        ? Decode<R, `${L}${F}`>
+        : `${Repeat<F, L extends '' ? '1' : L>}${Decode<R, ''>}`
+      : "";
 
-type a = RLE.Encode<"AAABCCXXXXXXY">
+  type Repeat<
+    S extends string,
+    N extends string,
+    C extends any[] = [],
+  > = `${C['length']}` extends N ? "" : `${S}${Repeat<S, N, [...C, ""]>}`;
+}
