@@ -39,11 +39,11 @@ SimpleVue({
 
 
 // ============= Your Code Here =============
-type GetComputed<T> = {
-  [K in keyof T]: T[K] extends (...args: any[]) => infer R ? R : never
+type InferComputed<T extends Record<string, () => any>> = {
+  [K in keyof T]: ReturnType<T[K]>
 }
-declare function SimpleVue <D, C, M>(options: {
+declare function SimpleVue <D, C extends Record<string, () => any>, M>(options: {
   data: (this: void) => D,
   computed: C & ThisType<D>,
-  methods: M & ThisType<D & GetComputed<C> & M>,
+  methods: M & ThisType<D & InferComputed<C> & M>,
 }): any
